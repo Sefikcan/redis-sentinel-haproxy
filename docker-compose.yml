@@ -1,0 +1,69 @@
+version: '3'
+
+services:
+  redis1:
+    image: redis
+    container_name: redis1
+    volumes:
+      - ./redis/redis1.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    networks:
+      - redis-net
+
+  redis2:
+    image: redis
+    container_name: redis2
+    volumes:
+      - ./redis/redis2.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    networks:
+      - redis-net
+
+  sentinel1:
+    image: redis
+    container_name: sentinel1
+    volumes:
+      - ./redis/sentinel1.conf:/usr/local/etc/redis/sentinel.conf
+    command: ["redis-server", "/usr/local/etc/redis/sentinel.conf", "--sentinel"]
+    networks:
+      - redis-net
+    depends_on:
+      - redis1
+      - redis2
+
+  sentinel2:
+    image: redis
+    container_name: sentinel2
+    volumes:
+      - ./redis/sentinel2.conf:/usr/local/etc/redis/sentinel.conf
+    command: ["redis-server", "/usr/local/etc/redis/sentinel.conf", "--sentinel"]
+    networks:
+      - redis-net
+    depends_on:
+      - redis1
+      - redis2
+
+  haproxy:
+    image: haproxy
+    container_name: haproxy
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      - "6379:6379"
+    networks:
+      - redis-net
+    depends_on:
+      - sentinel1
+      - sentinel2
+
+  dotnet-app:
+    build: ./dotnet-app
+    container_name: dotnet-app
+    depends_on:
+      - haproxy
+    networks:
+      - redis-net
+
+networks:
+  redis-net:
+    driver: bridge

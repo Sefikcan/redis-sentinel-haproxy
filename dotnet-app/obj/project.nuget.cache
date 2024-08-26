@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "9BYaG9KzYZqSH5Q96VnfJ7i/9VF2XnwjvlsOnnNF+DX8b4RkVduPyoTjao/rNRnhcHxZFMPtdkIJRyfB6h7ujw==",
+  "success": true,
+  "projectFilePath": "/Users/sefikcankanber/Desktop/Workspaces/redis-sentinel-haproxy/dotnet-app/dotnet-app.csproj",
+  "expectedPackageFiles": [
+    "/Users/sefikcankanber/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "/Users/sefikcankanber/.nuget/packages/pipelines.sockets.unofficial/2.2.8/pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
+    "/Users/sefikcankanber/.nuget/packages/stackexchange.redis/2.8.0/stackexchange.redis.2.8.0.nupkg.sha512",
+    "/Users/sefikcankanber/.nuget/packages/system.io.pipelines/5.0.1/system.io.pipelines.5.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
